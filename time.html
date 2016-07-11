@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css">
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js" charset="utf-8"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="EventUtil.js" charset="utf-8"></script>
+  <style media="screen">
+    .time{border:1px solid #ccc;padding:4px;}
+    .time span{margin:0 .5em;}
+    .time .active{background:#ccc;padding:5px;font-weight: bold;}
+    ::selection {
+    background:none;
+    }
+  </style>
+
+</head>
+<body>
+<div class="time" id="time">
+  <span class="Hours">00</span><i>:</i>
+  <span class="Minutes">00</span><i>:</i>
+  <span class="Seconds">00</span><i>.</i>
+  <span class="Milliseconds">000</span>
+</div>
+</body>
+<script type="text/javascript">
++function($) {
+  var time = document.getElementById("time");
+      time.onclick = function(event){
+        var event = EventUtil.getEvent(event),
+            eventTarget = EventUtil.getTarget(event);
+            console.dir(eventTarget);
+            if (eventTarget.localName == "span") {
+              $(eventTarget).siblings().contentEditable = false;
+              $(eventTarget).siblings().removeClass("active");
+              eventTarget.contentEditable  = true;
+              $(eventTarget).addClass("active");
+              if (eventTarget.innerHTML != "00" || eventTarget.innerHTML != "000") {
+                console.log(2222);
+              }
+            }
+      }
+}(jQuery);
+</script>
+</html>

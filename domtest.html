@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css">
+  <style media="screen">
+    .field{padding:10px;top:160px;position:absolute;width:200px;background: #eee;}
+    .popover{display:block;top:0;}
+  </style>
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js" charset="utf-8"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="EventUtil.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(function(){
+      $(document).ready(function(){
+        //close
+        $(this).mouseup(function(e){
+          var _con = $(".popover"),
+              event = EventUtil.getEvent(e),
+              eventTarget = EventUtil.getTarget(event);
+          if (!_con.is(eventTarget) && _con.has(eventTarget).length === 0) {
+            _con.hide();
+          }
+        });
+
+
+        function popOver(title,content,direction){
+          $(".popover").remove()
+          var popover = $("<div class='popover "+ direction +"'>");
+          var arrow = popover.append("<div class='arrow'>");
+          var event = EventUtil.getEvent(event);
+          var eventTarget = EventUtil.getTarget(event);
+              popover.append("<h3 class='popover-title'>" + title);
+              popover.append("<div class='popover-content'>" + content);
+              popover.css({
+                "left":"80px",
+                //"top":
+              });
+              console.log($(popover[0]).offsetHeight);
+              $(eventTarget).after(popover);
+              popover = null;
+        }
+
+        var data = ["name","host","date"],
+            field = $("#field");
+        for (var i = 0; i < data.length; i++) {
+          field.append("<li><a href='javascript:;'>" + data[i]);
+        };
+          field.find("li a").on("click",function(e){
+            var data = "<table style='width:100%'><thead><td>111</td><td>111</td><td>111</td><td>111</td></thead><tbody><tr><td>222</td></tr><tr><td>222</td></tr></tbody></table><br><br><br><br><br><br><br><br><br>"
+            popOver($(this).text(),data,"right");
+          });
+      })
+    })
+  </script>
+</head>
+<body>
+  <div id="field" class="field"></div>
+</body>
+</html>
