@@ -23,24 +23,23 @@
             _con.hide();
           }
         });
-
-
-        function popOver(title,content,direction){
-          $(".popover").remove()
+        // popover
+        // @ title,content,direction
+        function popOver(title,content,direction,e){
+          $(".popover").remove();
           var popover = $("<div class='popover "+ direction +"'>");
           var arrow = popover.append("<div class='arrow'>");
-          var event = EventUtil.getEvent(event);
+          var event = EventUtil.getEvent(e);
           var eventTarget = EventUtil.getTarget(event);
               popover.append("<h3 class='popover-title'>" + title);
               popover.append("<div class='popover-content'>" + content);
+              $(eventTarget).after(popover);
               popover.css({
                 "left":"80px",
-                //"top":
+                "top":"-" + (popover[0].offsetHeight / 2 - eventTarget.offsetTop - 8) + "px"
               });
-              console.log($(popover[0]).offsetHeight);
-              $(eventTarget).after(popover);
               popover = null;
-        }
+        };
 
         var data = ["name","host","date"],
             field = $("#field");
@@ -48,8 +47,8 @@
           field.append("<li><a href='javascript:;'>" + data[i]);
         };
           field.find("li a").on("click",function(e){
-            var data = "<table style='width:100%'><thead><td>111</td><td>111</td><td>111</td><td>111</td></thead><tbody><tr><td>222</td></tr><tr><td>222</td></tr></tbody></table><br><br><br><br><br><br><br><br><br>"
-            popOver($(this).text(),data,"right");
+            var data = "<table style='width:100%'><thead><td>111</td><td>111</td><td>111</td><td>111</td></thead><tbody><tr><td>222</td></tr><tr><td>222</td></tr></tbody></table><br><br>"
+            popOver($(this).text(),data,"right",e);
           });
       })
     })
